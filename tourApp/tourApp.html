@@ -1,0 +1,168 @@
+<head>
+  <title>Tour app</title>
+</head>
+
+
+
+<template name="layout">
+  <div class="container">
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header" style="width : 100%">
+          <div class="navbar-brand" > <b style="font-size: 27px"> <i class="glyphicon glyphicon-eye-open"> </i>
+ <i class="glyphicon glyphicon-eye-open"> </i>
+            <span>Tour Admin Application </span></b>
+          </div>
+
+          <div style="float:right"> {{> loginButtons}} </div>
+        </div>
+      </div>
+    </nav>
+
+
+    <div class="row">
+      <div class="col-md-2">{{> products }}
+        {{> screens }}</div>
+        <div class="col-md-7"> {{ >tourEdit}}</div>
+        <div class="col-md-3"> {{> chatApp }}</div>
+
+      </div>
+
+      <!--    {{> chatApp }} -->
+
+
+
+    </div>
+  </template>
+
+  <template name="chatApp">
+   <div class="well  well-sm" >
+    <h3><span class="label label-primary">Discuss</span></h3> <br>
+    {{> input }}
+    {{> messages }}
+  </div>
+</template>
+
+
+
+<template name="messages">
+<div style ="padding-top : 5px">
+  {{#each messages}}
+  <div class="well well-sm" style= "background-color: #EBEBEB;">
+    <div  class="row">
+      <div class="col-md-6 left">
+        <span class="label label-primary"> <strong style="font-size: 12px;">{{name}}:</strong></span>
+      </div>
+      <div class="co-md-6 right">
+        <small  style="color: #337ab7;background-color : white"  class="badge">{{formatSmallDate time}}</small>
+      </div>
+    </div>
+    <div  class="row">
+      <div class="col-md-12">
+        {{message}}
+      </div>
+    </div>
+  </div>
+  {{/each}}
+  </div>
+
+</template>
+
+<template name="products">
+
+  <div class="well  well-sm" >
+    <h3><span class="label label-primary">Products</span></h3>
+    <br>
+    <div class="list-group">
+
+     {{#each products}}
+
+     <a href="#" class="list-group-item products" style="word-wrap: break-word;" id="{{product}}">
+     <span class="badge">{{count}}</span>
+      <span class="list-group-item-heading">  <b>{{product}}</b> </span>
+
+    </a>
+
+    {{/each}}
+
+  </div>
+</div>
+
+</template>
+
+
+<template name="screens">
+
+  <div class="well  well-sm" >
+    <h3><span class="label label-primary">Screens</span></h3>
+    <br>
+    <div class="list-group">
+
+     {{#each screens}}
+
+     <a href="#" class="list-group-item pages" id="{{screen}}">
+      <h4 class="list-group-item-heading" style="word-wrap: break-word;"> <b>{{screen}} </b></h4>
+      <span class="glyphicon glyphicon-user" aria-hidden="true"></span> <b>{{editedBy}} </b>  <br>
+      <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> <b>{{formatDate editedOn}}</b>
+    </a>
+
+    {{/each}}
+
+  </div>
+</div>
+
+</template>
+
+
+
+<template name="input">
+
+  <div class="input-group">
+    <span class="input-group-addon" ><span id="basic-addon1" class="glyphicon glyphicon-earphone" aria-hidden="true"></span></span>
+    <input type="text" class="form-control" id="message" placeholder="Enter Message" aria-describedby="basic-addon1" style="height : 30px">
+  </div>
+</template>
+
+
+
+
+<template name="tourEdit">
+ {{#if values}}
+ <div class="row" style="height: 64px;">
+  <div class="col-md-10">
+    <div id="tourAlert" style ="display : none" class="alert alert-success" role="alert"> The Tour has been saved successfully</div>
+    <div id="tourDeleteAlert" style ="display : none" class="alert alert-success" role="alert"> The Tour has been deleted successfully</div>
+  </div>
+  <div class="col-md-2">
+
+  <div  style ="height:40px;width: 80px;">
+  <i id="delete" class="glyphicon glyphicon-trash" style="font-size: 30px;color:blue;padding-right:5px" title="Delete Tour" > </i>
+  <i id="save" class="glyphicon glyphicon-floppy-disk" style="font-size: 30px;color:green"  title="Save Tour" > </i>
+  </div>
+
+</div>
+
+</div>
+{{/if}}
+
+{{#each values}}
+<div class="row well">
+  <div class="col-md-4">
+   <h4><span class="label label-info">Title</span></h4>
+   <h4 class="tourTitle">{{title}} </h4>
+
+   <h4> <span class="label label-info" >Element</span> </h4>
+
+   <textarea style="margin-top:10px" class="form-control tourElement" rows="2" value="{{element}}"></textarea>
+ </div>
+
+ <div class="col-md-8">
+   <h4><span class="label label-warning" >Description</span></h4>
+
+   <textarea style="margin-top:10px"  class="form-control tourContent" rows="8"> {{content}}</textarea>
+ </div>
+</div>
+{{/each}}
+
+</template>
+
